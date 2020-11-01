@@ -54,6 +54,16 @@ session_start();
         ?><li><a href="login.php">Log In</a></li><?php
     }
   ?>
+<!-- Show insert article link for admin users -->
+<?php 
+    if($_SESSION["userType"] == 'admin'){  
+    ?>
+        <li>
+            <a href="insert-article.php">Insert Article</a>   
+        </li>
+        <?php
+    }
+?>
   
 </ul>
 </div>
@@ -70,8 +80,11 @@ include('includes/db-config.php');
 $stmt = $pdo->prepare("SELECT * FROM `articleDB`");
 $stmt1 = $pdo->prepare("SELECT * FROM `visitorDataDB`");
 
+$stmt2 = $pdo->prepare("SELECT * FROM `likesDB`");
+
 $stmt -> execute();
 $stmt1 -> execute();
+$stmt2 -> execute();
 
 //cycle through each row in the DB to display article list and buttons based on PHP Session Authentication/un-authentication
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {     
@@ -110,18 +123,22 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <!-- AUTHENTICATE ONLY ADMIN users to see the following. using if{}. Also authenticate admin users on each page aswell -->
         <!-- Edit Button & Delete Button & Set Featured  -->
         <?php
-        if($_SESSION["usertype"] == 'admin'){
+        if($_SESSION["userType"] == 'admin'){
             ?>
-            <!-- Edit article Button -->
-            <!-- Delete article Button  -->
             <!-- Add new article Button  -->
             <!-- Like article Button  -->
-            <button type="button">Click Me!</button> 
+            <!-- edit and delete article button -->
+            <!-- Set featured Button -->
+            <p><a href= "edit-article.php" >Edit   | </a><a href= "delete-article.php" >  Delete  | </a><a href= "like-unlike.php" >  Like  |</a><a href= "setFeatured-Article.php" >  Feature This Article</a></p>
+    
         
         <?php
-        } elseif ($_SESSION["usertype"] == 'registered'){
+        } elseif ($_SESSION["userType"] == 'registered'){
             ?> <!-- Like article Button  -->
-            no
+             <p><a href= "like-unlike.php" >  Like</a></p>
+            <?php
+        } else {
+            ?> <h4> nothing </h4>
             <?php
         }
 
