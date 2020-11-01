@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <!-- link favicon, title the page,  -->
+    <!-- title: Contact  -->
+</head>
+<body>
+    <h1> Contact Us</h1>
+    <p> 
+        Complete the form below to contact us. 
+    </p>
+
+<!--Contact form  -->
+<form action="insert-contact.php" method="POST"> 
+    First Name: <input type="text" name="firstname" required />
+
+    Last Name: <input type="text" name="lastname" required/>
+
+    Email: <input type="email" name="email" required />
+
+    <p>Category Interest:</p> 
+    <label for="categoryInterest1">Industry</label><input type="checkbox" name="categoryInterest1" value= "1"/>
+
+    <label for="categoryInterest2">Technical</label><input type="checkbox" name="categoryInterest2" value= "1"/>
+
+    <label for="categoryInterest3">Career</label>
+    <input type="checkbox" name="categoryInterest3" value= "1"/>
+
+    <p>Select your Role at IMM</p> 
+    <label for="role">Role List</label>
+    <select name="role">
+        <option value="industry">Industry</option>
+        <option value="writer">Writer</option>
+        <option value="contributor" selected>Contributor</option>
+        <option value="Administrator" selected>Administrator</option>
+    </select>
+
+   <input type="submit" />
+</form>
+
+<!-- Link back to homepage -->
+<p> Back to <a href="articles-list.php">Article Home Page</a></p>
+
+</body>
+</html>
