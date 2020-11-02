@@ -13,17 +13,11 @@ session_start();
 <html>
 <head>
 <!-- Meta Data, please visit -->
-    <meta charset="utf-8">
-    <title>IMM News Metwork</title>
-    <meta content="IMM News network aggregate of design news" name="description">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link href="assets/favicon.png" rel="shortcut icon" type="image/x-icon">
-  <link href="assets/imm-logo-black.png" rel="apple-touch-icon">
-  <meta charset="utf-8"/>
-        <title>More Form Stuff</title>
-        <title>More form stuff</title>
-	    <meta name="description" content="This website is about a menu" />
-	    <meta name="keywords" content="menu, appetizers, steak, breadsticks, cheap food" />
+        <meta charset="utf-8">
+        <title>IMM News Metwork</title>
+        <meta content="IMM News network aggregate of design news" name="description">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <meta name="keywords" content="industry, news, career, imm" />
 	    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -39,8 +33,8 @@ session_start();
 <img src="assets/imm-logo-black.png" alt="IMM News Network" width="100" > 
 <ul>
   <li><a href="articles-list.php">Home</a></li>
-  <li><a href="about.html">About</a></li>
-  <li><a href="contact.html">Contact</a></li>
+  <li><a href="about.php">About</a></li>
+  <li><a href="contact.php">Contact</a></li>
   <?php
   //Show the login or logout item conditional based on if current user has a authenticated session or not
 
@@ -60,6 +54,9 @@ session_start();
     ?>
         <li>
             <a href="insert-article.php">Insert Article</a>   
+        </li>
+        <li>
+            <a href="contact-list.php"> View Contact List Results</a>   
         </li>
         <?php
     }
@@ -94,7 +91,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         ?>
 
     <h2> Featured Articles: <h2>  
-    <img src="assets/<?php echo($row["articleImage"]);?>" alt="News Article" width="300" >
+    <img src="<?php echo($row["articleImage"]);?>" alt="News Article" width="300" >
     
     <!-- Featured Articles -->
     <h2> <?php echo($row["articleTitle"]);?></h2>
@@ -110,7 +107,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     if ($row["featuredArticleFlag"] == 0 ){
         ?>
         <h2> List of Articles : <h2>
-    <img src="assets/<?php echo($row["articleImage"]);?>" alt="News Article" width="100" >
+    <img src="<?php echo($row["articleImage"]);?>" alt="News Article" width="100" >
     
     <!-- Article Titles -->
     <h2> <?php echo($row["articleTitle"]);?></h2>
@@ -129,16 +126,20 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <!-- Like article Button  -->
             <!-- edit and delete article button -->
             <!-- Set featured Button -->
-            <p><a href= "edit-article.php" >Edit   | </a><a href= "delete-article.php" >  Delete  | </a><a href= "like-unlike.php" >  Like  |</a><a href= "setFeatured-Article.php" >  Feature This Article</a></p>
+            <p><a href= "edit-article.php?articleId=<?php echo($row["articleId"]); ?>" >Edit   | </a><a href= "delete-article.php?articleId=<?php echo($row["articleId"]); ?>" >  Delete  | </a>
+            
+            <a href= "like-unlike.php?articleId=<?php echo($row["articleId"]); ?>" >  Like  |</a>
+            
+            <a href= "setFeatured-Article.php?articleId=<?php echo($row["articleId"]); ?>" >  Feature This Article</a></p>
     
         
         <?php
         } elseif ($_SESSION["userType"] == 'registered'){
             ?> <!-- Like article Button  -->
-             <p><a href= "like-unlike.php" >  Like</a></p>
+             <p><a href= "like-unlike.php?articleId=<?php echo($row["articleId"]); ?>" > Like This Article</a></p>
             <?php
         } else {
-            ?> <h4> nothing </h4>
+            ?> <p><a href="login.php">Log In </a> to Like this Article </p>
             <?php
         }
 

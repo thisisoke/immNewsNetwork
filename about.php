@@ -1,12 +1,9 @@
 <?php
-//Login PHP 
+//About.php
 
 //start PHP Session 
 session_start();
-
-
 ?>
-
 <!doctype html>
 <html>
     <head>
@@ -62,29 +59,42 @@ session_start();
           
         </ul>
         </div>
-    <h1> Login Page </h1>
 
-<!--  Form to Login-->
-<h2> Have an Account? Login here </h2>
-<form action="login-process.php" method="POST"> 
-    Username:<input type="text" name="username" />
-    Password: <input type="password" name="password" />
-   <input type="submit" />
-</form>
+        <?php 
+        //load in db-configuration file
+        include('includes/db-config.php');
 
-<!-- Form to register an account -->
-<h2> Don't Have An Account? Register here: </h2>
-<form action="register-process.php" method="POST"> 
-    Select a User name<input type="text" name="username" />
-    Make a Password: <input type="password" name="password" />
-    Email: <input type="email" name="email" />
+        //Create select statments to get data from 2 Databases for use on this page
+        $stmt = $pdo->prepare("SELECT * FROM `aboutPageDB` WHERE `aboutPageId` = 1;");
 
-    <input type="hidden" name="userType" value="registered">
+        $stmt -> execute();
 
-   <input type="submit" />
-</form>
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) { 
 
+            if($_SESSION["userType"] == 'admin'){  
+            ?>
+            <form action="process-edit-about.php" method="POST" id="editform"> 
+                <fieldset>
+                    <label for= "aboutPageTitle"> About Page Title:</label>
+                    <input type="text" name="aboutPageTitle"  value= "<?php echo($row["aboutPageTitle"]);?>" size="50" required/><br>
+
+                    <label for= "aboutPageDescription">  About Page Paragraph:</label>
+                    <textarea  type="text" name="aboutPageDescription" form_Id="editform" rows="15" cols="30"><?php echo($row["aboutPageDescription"]);?> </textarea>
+                    
+                </fieldset>
+                <input type="submit" /> 
+            </form>
+            <?php
+            } else {
+                
+            ?>
+            <h1> <?php echo($row["aboutPageTitle"]);?></h1>
+            <p><?php echo($row["aboutPageDescription"]);?></p> <?php
+
+            }
+        }?>
 
 
 </body>
+
 </html>
