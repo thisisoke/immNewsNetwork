@@ -59,11 +59,7 @@ $counted = $countlikesDB["COUNT(articleId)"];
  $stmt4->execute();
 
  
-//if like is liked in full article page, redirect back to that page
- if (isset($return)){
-    
-    //header("$returnAdress");
- } else {
-    //Redirect to aricle page once complete
-    header("Location: articles-list.php");
- }
+//redirect back to to article dashboard
+header("Location: articles-list.php");
+
+?>

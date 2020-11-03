@@ -7,17 +7,6 @@
 session_start();
 
 
-
-echo($_POST["articleText"]." ");
-echo($_POST["articleTitle"]." ");
-echo($_POST["articleCategory"]." ");
-echo($_POST["articlePreview"]." ");
-echo($_POST["articleLink"]." ");
-echo($_POST["articleImage"]." ");
-echo($_POST["articleAuthor"]." ");
-echo($_POST["articleDate"]." ");
-
-
 $articleId = $_POST["articleId"];
 $articleText = $_POST["articleText"];
 $articleTitle = $_POST["articleTitle"];
