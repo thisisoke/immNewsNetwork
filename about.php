@@ -80,9 +80,11 @@ session_start();
 
                     <label for= "aboutPageDescription">  About Page Paragraph:</label>
                     <textarea  type="text" name="aboutPageDescription" form_Id="editform" rows="15" cols="30"><?php echo($row["aboutPageDescription"]);?> </textarea>
+
+                    <input type="hidden" name="aboutPageId" value= "<?php echo($row["aboutPageId"]);?>">
                     
                 </fieldset>
-                <input type="submit" /> 
+                <input type="submit"  value="Save"/> 
             </form>
             <?php
             } else {

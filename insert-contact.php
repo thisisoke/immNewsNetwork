@@ -42,6 +42,9 @@ $stmt = $pdo->prepare("INSERT INTO `contactDB`(`contactId`, `firstname`, `lastna
 
 $stmt -> execute();
 
-header("Location: articles-list.php");
+
+
+?><h1> Contact Sumission Succesful <?php echo($_SESSION["username"]) ?> </h1>
+<p> Click to go back to<a href= "articles-list.php"> Article Dashboard </a></p> <?php
 
 ?>

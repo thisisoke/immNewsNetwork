@@ -16,16 +16,16 @@ echo($_POST["articleAuthor"]." ");
 echo($_POST["articleDate"]." ");
 
 
-$articleText = $_POST["articleText"];
-$articleTitle = $_POST["articleTitle"];
-$articleCategory = $_POST["articleCategory"];
-$articlePreview = $_POST["articlePreview"];
-$articleLink = $_POST["articleLink"];
-$articleImage = $_POST["articleImage"];
-$articleAuthor = $_POST["articleAuthor"];
-$articleDate = $_POST["articleDate"];
-$articleLikes = "0";
-$featuredArticleFlag = 1;
+// $articleText = $_POST["articleText"];
+// $articleTitle = $_POST["articleTitle"];
+// $articleCategory = $_POST["articleCategory"];
+// $articlePreview = $_POST["articlePreview"];
+// $articleLink = $_POST["articleLink"];
+// $articleImage = $_POST["articleImage"];
+// $articleAuthor = $_POST["articleAuthor"];
+// $articleDate = $_POST["articleDate"];
+// $articleLikes = '0';
+// $featuredArticleFlag = '0';
 
 
 //dsn connection to data base by inlcuding db config file with connection details.
@@ -35,8 +35,7 @@ include('includes/db-config.php');
 if($_SESSION["userType"] == 'admin'){
     
     //Insert article in the database
-    $stmt = $pdo->prepare("INSERT INTO `articleDB` (`articleId`, `articleText`, `articleTitle`, `articleLikes`, `articleCategory`, `articlePreview`, `articleLink`, `articleImage`, `articleAuthor`, `articleDate`, `featuredArticleFlag`) VALUES (NULL, '$articleText', '$articleTitle', '$articleLikes', '$articleCategory', '$articlePreview', '$articleLink', '$articleImage', '$articleAuthor', '$articleDate', '$featuredArticleFlag');");
-
+    $stmt = $pdo->prepare("INSERT INTO `articleDB` (`articleId`, `articleText`, `articleTitle`, `articleLikes`, `articleCategory`, `articlePreview`, `articleLink`, `articleImage`, `articleAuthor`, `articleDate`, `featuredArticleFlag`) VALUES ( NULL, '$articleText', '$articleTitle', '$articleLikes', '$articleCategory', '$articlePreview', '$articleLink', '$articleImage', '$articleAuthor', '$articleDate', '$featuredArticleFlag')");
 
     $stmt -> execute();
 

@@ -1,6 +1,6 @@
 <?php
-//setFeatured-Atricle.php
-//Set article as featured article or 
+//removeFeatured-Atricle.php
+//removing article from featured
 
 //startsession 
 session_start();
@@ -13,14 +13,9 @@ include('includes/db-config.php');
 
 //Check if User is Admin
 if($_SESSION["userType"] == 'admin'){ 
-    //Set all article featured to false so new article can be chosen
-    $stmt1 = $pdo->prepare("UPDATE `articleDB` SET `featuredArticleFlag`= '0';");
 
-    $stmt1->execute();
-
-
-    //Find the desired article to set to featured in the database
-    $stmt2 = $pdo->prepare("UPDATE `articleDB` SET `featuredArticleFlag`= '1' WHERE `articleId` = $articleId;");
+    //Find the desired article to set to remove featured in the database
+    $stmt2 = $pdo->prepare("UPDATE `articleDB` SET `featuredArticleFlag`= '0' WHERE `articleId` = $articleId;");
     $stmt2->execute();
 
     //Get article Name for success message
@@ -29,7 +24,7 @@ if($_SESSION["userType"] == 'admin'){
 
     while($row = $stmt3->fetch(PDO::FETCH_ASSOC)) { 
 
-    ?><h1> You Have Succesfully set <i><?php echo($row["articleTitle"]);?></i> as a featured article <?php echo($_SESSION["username"]) ?> </h1>
+    ?><h1> You Have Succesfully Removed  <i><?php echo($row["articleTitle"]);?></i> as a featured article <?php echo($_SESSION["username"]) ?> </h1>
     <p> Navigate back to the <a href= "articles-list.php"> Article Dashboard</a></p> <?php
     }
 

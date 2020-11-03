@@ -7,8 +7,16 @@
 session_start();
 
 
-//dsn connection to data base by inlcuding db config file with connection details.
-include('includes/db-config.php');
+
+echo($_POST["articleText"]." ");
+echo($_POST["articleTitle"]." ");
+echo($_POST["articleCategory"]." ");
+echo($_POST["articlePreview"]." ");
+echo($_POST["articleLink"]." ");
+echo($_POST["articleImage"]." ");
+echo($_POST["articleAuthor"]." ");
+echo($_POST["articleDate"]." ");
+
 
 $articleId = $_POST["articleId"];
 $articleText = $_POST["articleText"];
@@ -19,6 +27,8 @@ $articleLink = $_POST["articleLink"];
 $articleImage = $_POST["articleImage"];
 $articleAuthor = $_POST["articleAuthor"];
 $articleDate = $_POST["articleDate"];
+$articleLikes = '0';
+$featuredArticleFlag = '0';
 
 
 //dsn connection to data base by inlcuding db config file with connection details.
@@ -28,7 +38,7 @@ include('includes/db-config.php');
 if($_SESSION["userType"] == 'admin'){
 
     //Insert article in the database
-    $stmt = $pdo->prepare("UPDATE `articleDB` SET `articleText`= $articleText,`articleTitle`= $articleTitle,`articleCategory`= $articleCategory,`articlePreview`= $articlePreview,`articleLink`= $articleLink,`articleImage`= $articleImage,`articleAuthor`= $articleAuthor,`articleDate`= $articleDate WHERE `articleId` = $articleId;");
+    $stmt = $pdo->prepare("UPDATE `articleDB` SET `articleText`= '$articleText',`articleTitle`= '$articleTitle',`articleCategory`= '$articleCategory',`articlePreview`= '$articlePreview',`articleLink`= '$articleLink',`articleImage`= '$articleImage',`articleAuthor`= '$articleAuthor',`articleDate`= '$articleDate' WHERE `articleId` = '$articleId' ");
 
 
     $stmt -> execute();

@@ -22,7 +22,7 @@ $stmt -> execute();
 
 //assigned username and usertype to session variables for access in the articles-listphp
 $_SESSION["username"] = $_POST["username"];
-$_SESSION["userType"] = $_POST["password"];
+$_SESSION["userType"] = 'registered';
 
 
 header("Location: articles-list.php");
